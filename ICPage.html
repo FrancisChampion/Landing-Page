@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IC by Koryis - Intelligent Companion for Dyslexic Students</title>
+    <style>
+        /* Dyslexia-Friendly Design */
+        :root {
+            /* Dyslexia-friendly color palette */
+            --primary-cream: #FEFCF3;
+            --secondary-beige: #F5F1E3;
+            --accent-teal: #4A9B9B;
+            --accent-coral: #E07A5F;
+            --dark-text: #3D405B;
+            --light-text: #626478;
+            --border-soft: #D4CFC4;
+            --card-bg: #FAF8F1;
+            --success-green: #81B29A;
+            --warning-yellow: #F4A261;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Dyslexia-friendly fonts: OpenDyslexic alternative using common fonts */
+            font-family: 'Comic Sans MS', 'Arial', 'Verdana', sans-serif;
+            background: var(--primary-cream);
+            color: var(--dark-text);
+            line-height: 1.8;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            word-spacing: 2px;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--card-bg);
+            padding: 1.5rem 0;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--accent-teal);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-teal);
+            letter-spacing: 3px;
+        }
+
+        .logo-subtitle {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            display: block;
+            margin-top: 0.3rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .nav-link:hover {
+            background: var(--accent-teal);
+            color: var(--primary-cream);
+        }
+
+        .cta-button {
+            background: var(--accent-coral);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 3px solid var(--accent-coral);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--accent-coral);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary-beige) 0%, var(--primary-cream) 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--accent-teal);
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: var(--dark-text);
+            margin-bottom: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.9;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .badge {
+            background: var(--card-bg);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            border: 3px solid var(--accent-teal);
+            min-width: 200px;
+        }
+
+        .badge-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-coral);
+            display: block;
+        }
+
+        .badge-label {
+            font-size: 1rem;
+            color: var(--dark-text);
+            margin-top: 0.5rem;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 5rem 0;
+            background: var(--primary-cream);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--accent-teal);
+            margin-bottom: 3rem;
+            font-weight: bold;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .process-card {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 4px solid var(--border-soft);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .process-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-teal);
+            box-shadow: 0 10px 30px rgba(74, 155, 155, 0.2);
+        }
+
+        .process-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 2rem;
+            color: white;
+        }
+
+        .process-card h3 {
+            font-size: 1.8rem;
+            color: var(--accent-coral);
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .process-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark-text);
+        }
+
+        /* Dashboards Section */
+        .dashboards {
+            padding: 5rem 0;
+            background: var(--secondary-beige);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .dashboard-card {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            border-left: 8px solid var(--accent-teal);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .dashboard-card.parent {
+            border-left-color: var(--accent-coral);
+        }
+
+        .dashboard-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dashboard-card h3 {
+            font-size: 2rem;
+            color: var(--accent-teal);
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .dashboard-card.parent h3 {
+            color: var(--accent-coral);
+        }
+
+        .dashboard-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .dashboard-features li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            border-bottom: 2px solid var(--border-soft);
+        }
+
+        .dashboard-features li:last-child {
+            border-bottom: none;
+        }
+
+        .dashboard-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        /* Why IC Section */
+        .why-ic {
+            padding: 5rem 0;
+            background: var(--primary-cream);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-box {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 3px solid var(--border-soft);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-box:hover {
+            border-color: var(--success-green);
+            transform: scale(1.03);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-box h4 {
+            font-size: 1.5rem;
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .feature-box p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--dark-text);
+        }
+
+        /* Subscription Section */
+        .subscription {
+            padding: 5rem 0;
+            background: var(--primary-cream);
+        }
+
+        .section-subtitle-large {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .subscription-note {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--accent-coral);
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 4px solid var(--border-soft);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent-teal);
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(74, 155, 155, 0.2);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(74, 155, 155, 0.15);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.08);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--accent-coral);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .plan-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-card h3 {
+            font-size: 2rem;
+            color: var(--accent-teal);
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .price {
+            margin: 2rem 0;
+            padding: 1.5rem 0;
+            border-top: 3px solid var(--border-soft);
+            border-bottom: 3px solid var(--border-soft);
+        }
+
+        .currency {
+            font-size: 2rem;
+            color: var(--accent-teal);
+            font-weight: bold;
+        }
+
+        .amount {
+            font-size: 3.5rem;
+            color: var(--accent-teal);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .period {
+            display: block;
+            font-size: 1rem;
+            color: var(--light-text);
+            margin-top: 0.5rem;
+        }
+
+        .amount-text {
+            font-size: 1.5rem;
+            color: var(--accent-teal);
+            font-weight: bold;
+            display: block;
+            padding: 1rem 0;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 1rem 0 1rem 2.5rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            border-bottom: 2px solid var(--border-soft);
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-features li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+            font-size: 1.3rem;
+        }
+
+        .plan-button {
+            background: var(--accent-teal);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: 3px solid var(--accent-teal);
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .plan-button:hover {
+            background: transparent;
+            color: var(--accent-teal);
+            transform: translateY(-3px);
+        }
+
+        .plan-button.outline {
+            background: transparent;
+            color: var(--accent-teal);
+            border-color: var(--accent-teal);
+        }
+
+        .plan-button.outline:hover {
+            background: var(--accent-teal);
+            color: white;
+        }
+
+        .cancel-note {
+            text-align: center;
+            font-size: 1rem;
+            color: var(--light-text);
+            margin-top: 3rem;
+            font-style: italic;
+        }
+
+        /* Topics Section */
+        .topics {
+            padding: 5rem 0;
+            background: var(--secondary-beige);
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .topic-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 3px solid var(--border-soft);
+            transition: all 0.3s ease;
+        }
+
+        .topic-card:hover {
+            background: var(--accent-teal);
+            color: white;
+            border-color: var(--accent-teal);
+        }
+
+        .topic-card h4 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--accent-teal) 0%, var(--accent-coral) 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .cta-large-button {
+            background: white;
+            color: var(--accent-teal);
+            padding: 1.5rem 3rem;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+        }
+
+        .cta-large-button:hover {
+            background: transparent;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-text);
+            color: var(--primary-cream);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 2rem;
+        }
+
+        .footer h3 {
+            font-size: 2rem;
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--primary-cream);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-coral);
+        }
+
+        /* Accessibility Features */
+        .accessibility-bar {
+            background: var(--warning-yellow);
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            color: var(--dark-text);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            .nav-menu {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .process-grid,
+            .dashboard-grid,
+            .features-grid,
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* High contrast for better readability */
+        @media (prefers-contrast: high) {
+            :root {
+                --dark-text: #000000;
+                --light-text: #333333;
+            }
+        }
+
+        /* Reduced motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Accessibility Notice -->
+    <div class="accessibility-bar">
+        This website uses dyslexia-friendly fonts and colors for better reading experience
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">
+                    KORYIS
+                    <span class="logo-subtitle">Intelligent Companion</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+                    <li><a href="#dashboards" class="nav-link">Dashboards</a></li>
+                    <li><a href="#why-ic" class="nav-link">Why IC</a></li>
+                    <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                </ul>
+                <a href="#pricing" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1> What Is IC by Koryis?</h1>
+            <p class="hero-subtitle">
+                IC (Intelligent Companion) is an adaptive assessment platform designed specifically for dyslexic students aged 11–16 in the UK.
+            </p>
+            <p class="hero-description">
+                Built by Koryis, IC complements classroom teaching by helping students master Maths through personalized, responsive questioning.
+            </p>
+
+            <div class="hero-badges">
+                <div class="badge">
+                    <span class="badge-number">11-16</span>
+                    <span class="badge-label">Age Range</span>
+                </div>
+                <div class="badge">
+                    <span class="badge-number">100%</span>
+                    <span class="badge-label">UK GCSE Aligned</span>
+                </div>
+                <div class="badge">
+                    <span class="badge-number">24/7</span>
+                    <span class="badge-label">Available</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title"> How IC Works</h2>
+            
+            <div class="process-grid">
+                <div class="process-card">
+                    <div class="process-icon"></div>
+                    <h3>Teacher Teaches</h3>
+                    <p>While teachers deliver lessons, IC continuously evaluates each student's understanding using adaptive questions.</p>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-icon"></div>
+                    <h3>IC Assesses</h3>
+                    <p>IC learns from every response, refining future questions to match the student's pace, gaps, and strengths.</p>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-icon">📈</div>
+                    <h3>Personalized Learning</h3>
+                    <p>Students receive targeted feedback and tailored practice, helping them build confidence and prepare effectively for their GCSE Maths.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboards Section -->
+    <section id="dashboards" class="dashboards">
+        <div class="container">
+            <h2 class="section-title">Dashboards for Everyone</h2>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="dashboard-icon"></div>
+                    <h3>Teacher Dashboard</h3>
+                    <p>Empower your teaching with real-time insights and control</p>
+                    <ul class="dashboard-features">
+                        <li>Monitor student activity in real time</li>
+                        <li>Assign tasks based on topic or performance</li>
+                        <li>Leave personalized notes to guide student progress</li>
+                        <li>Track mastery and misconceptions across the class</li>
+                    </ul>
+                </div>
+
+                <div class="dashboard-card parent">
+                    <div class="dashboard-icon"></div>
+                    <h3>Parent Dashboard</h3>
+                    <p>Stay connected with your child's learning journey</p>
+                    <ul class="dashboard-features">
+                        <li>View your child's marks and progress</li>
+                        <li>Read feedback on performance and learning gaps</li>
+                        <li>Receive activity suggestions to support learning at home</li>
+                        <li>Access weekly insights and termly reports to stay informed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why IC Section -->
+    <section id="why-ic" class="why-ic">
+        <div class="container">
+            <h2 class="section-title"> Why IC Matters</h2>
+            
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon"></div>
+                    <h4>Dyslexia Support</h4>
+                    <p>Designed specifically with accessible fonts, voice narration, and low-stimulation visuals</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon"></div>
+                    <h4>Complete Coverage</h4>
+                    <p>All major GCSE Maths topics included</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon"></div>
+                    <h4>Adaptive Learning</h4>
+                    <p>Questions adjust to each student's unique pace and ability</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon"></div>
+                    <h4>Build Confidence</h4>
+                    <p>Helps students cope, catch up, and thrive — no matter their starting point</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">🔊</div>
+                    <h4>Voice Narration</h4>
+                    <p>Every question can be read aloud for better comprehension</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">✨</div>
+                    <h4>Low Stimulation</h4>
+                    <p>Clean, calm interface reduces cognitive overload</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Topics Section -->
+    <section class="topics">
+        <div class="container">
+            <h2 class="section-title">📐 GCSE Maths Topics Covered</h2>
+            
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <h4>🔢 Number</h4>
+                </div>
+                <div class="topic-card">
+                    <h4>📊 Algebra</h4>
+                </div>
+                <div class="topic-card">
+                    <h4>📐 Geometry</h4>
+                </div>
+                <div class="topic-card">
+                    <h4>⚖️ Ratio</h4>
+                </div>
+                <div class="topic-card">
+                    <h4>🎲 Probability</h4>
+                </div>
+                <div class="topic-card">
+                    <h4>📈 Statistics</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Section -->
+    <section id="pricing" class="subscription">
+        <div class="container">
+            <h2 class="section-title">💳 Choose Your Plan</h2>
+            <p class="section-subtitle-large">Simple pricing. Powerful support.</p>
+            <p class="subscription-note">Every subscription includes free parent access.</p>
+            
+            <div class="pricing-grid">
+                <!-- Individual Plan -->
+                <div class="pricing-card">
+                    <div class="plan-icon">🧍</div>
+                    <h3>Individual Plan</h3>
+                    <div class="price">
+                        <span class="currency">£</span>
+                        <span class="amount">5</span>
+                        <span class="period">per child / month</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Full access to IC adaptive assessments</li>
+                        <li>Personalized feedback and progress tracking</li>
+                        <li>Free parent dashboard</li>
+                    </ul>
+                    <button class="plan-button" onclick="showIndividualPlan()">Subscribe Now</button>
+                </div>
+
+                <!-- Family Bundle -->
+                <div class="pricing-card featured">
+                    <div class="popular-badge">BEST VALUE</div>
+                    <div class="plan-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Family Bundle</h3>
+                    <div class="price">
+                        <span class="currency">£</span>
+                        <span class="amount">16.99</span>
+                        <span class="period">/ month for up to 4 students</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>All features of the individual plan</li>
+                        <li>Manage multiple learners from one parent account</li>
+                        <li>Ideal for siblings or home-educating families</li>
+                    </ul>
+                    <button class="plan-button" onclick="showFamilyBundle()">Get Family Bundle</button>
+                </div>
+
+                <!-- School Licensing -->
+                <div class="pricing-card">
+                    <div class="plan-icon">🏫</div>
+                    <h3>School Licensing</h3>
+                    <div class="price">
+                        <span class="amount-text">Contact us for pricing</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Teacher dashboards for class-wide monitoring</li>
+                        <li>Termly reports and curriculum alignment</li>
+                        <li>Staff training and onboarding support</li>
+                    </ul>
+                    <button class="plan-button outline" onclick="showSchoolLicensing()">Request School Access</button>
+                </div>
+            </div>
+            
+            <p class="cancel-note">Cancel anytime. No hidden fees.</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="get-started" class="cta-section">
+        <div class="container">
+            <h2>IC by Koryis is here to help dyslexic students master Maths</h2>
+            <p>Confidently, consistently, and compassionately.</p>
+            <a href="#pricing" class="cta-large-button">Start Your Journey Today</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3>KORYIS</h3>
+                <p>Empowering dyslexic students to master Maths with confidence</p>
+                
+                <div class="footer-links">
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">For Teachers</a>
+                    <a href="#" class="footer-link">For Parents</a>
+                    <a href="#" class="footer-link">Contact</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                </div>
+            </div>
+            
+            <p>&copy; 2025 Koryis. All rights reserved. | Designed with dyslexic learners in mind</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation
+            const navLinks = document.querySelectorAll('.nav-link, .cta-button, .cta-large-button');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        const targetSection = document.querySelector(targetId);
+                        if (targetSection) {
+                            const navHeight = document.querySelector('.navbar').offsetHeight;
+                            const targetPosition = targetSection.offsetTop - navHeight - 20;
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Add scroll effect to navbar
+            let lastScroll = 0;
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    navbar.style.boxShadow = '0 5px 25px rgba(0,0,0,0.15)';
+                } else {
+                    navbar.style.boxShadow = '0 3px 15px rgba(0,0,0,0.08)';
+                }
+                
+                lastScroll = currentScroll;
+            });
+
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all cards
+            const cards = document.querySelectorAll('.process-card, .dashboard-card, .feature-box, .topic-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Badge counter animation
+            const badges = document.querySelectorAll('.badge-number');
+            badges.forEach(badge => {
+                const target = badge.textContent;
+                badge.textContent = '0';
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && badge.textContent === '0') {
+                            badge.textContent = target;
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                observer.observe(badge);
+            });
+
+            // Subscription alert functions
+            window.showIndividualPlan = function() {
+                alert("💳 INDIVIDUAL PLAN\n\n" +
+                      "Price: £5 per child / month\n\n" +
+                      "✅ Full access to IC adaptive assessments\n" +
+                      "✅ Personalized feedback and progress tracking\n" +
+                      "✅ Free parent dashboard\n\n" +
+                      "Click OK to proceed with subscription setup.\n" +
+                      "You'll be redirected to our secure payment portal.");
+            };
+
+            window.showFamilyBundle = function() {
+                alert("👨‍👩‍👧‍👦 FAMILY BUNDLE - BEST VALUE!\n\n" +
+                      "Price: £16.99 / month for up to 4 students\n\n" +
+                      "✅ All features of the individual plan\n" +
+                      "✅ Manage multiple learners from one parent account\n" +
+                      "✅ Ideal for siblings or home-educating families\n\n" +
+                      "Click OK to proceed with family bundle setup.\n" +
+                      "You'll be redirected to our secure payment portal.");
+            };
+
+            window.showSchoolLicensing = function() {
+                alert("🏫 SCHOOL LICENSING\n\n" +
+                      "Contact Koryis for institutional pricing\n\n" +
+                      "✅ Teacher dashboards for class-wide monitoring\n" +
+                      "✅ Termly reports and curriculum alignment\n" +
+                      "✅ Staff training and onboarding support\n\n" +
+                      "Click OK and we'll send your request to our school partnerships team.\n" +
+                      "Someone will contact you within 24 hours to discuss your needs.");
+            };
+        });
+    </script>
+</body>
+</html>
